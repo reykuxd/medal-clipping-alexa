@@ -7,25 +7,17 @@
 // @permission native
 // ==/VickiScript==
 
-$vs.listen('crypt dot', async (req, res) => {
-    await handleCommand(req, res);
-});
+const listeningFor = [
+    'crypt dot',
+    'quit',
+    'clip',
+    'quit that',
+    'clip that'
+];
 
-$vs.listen('quit', async (req, res) => {
-    await handleCommand(req, res);
-});
-
-$vs.listen('clip', async (req, res) => {
-    await handleCommand(req, res);
-});
-
-$vs.listen('quit that', async (req, res) => {
-    await handleCommand(req, res);
-});
-
-$vs.listen('clip that', async (req, res) => {
-    await handleCommand(req, res);
-});
+for (const phrase of listeningFor) {
+    $vs.listen(phrase, handleCommand);
+}
 
 async function handleCommand(req, res) {
     $vs.native.assertAvailable();
